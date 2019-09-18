@@ -32,7 +32,7 @@ def outstandingDebt(m, ans):
         #changingcount
         count -= 1
         # remove hashtag in line below if you want to see month by mont saldo
-        print(currbalance)
+        #print(currbalance)
     
     #when cont for numbers of months runs down print summary of balance after given period    
     if count == 0:
