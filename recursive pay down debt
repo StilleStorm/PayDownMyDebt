@@ -1,0 +1,62 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Mar 10 22:58:58 2018
+
+@author: StilleStorm
+"""
+#Variables fro grader, do not include in grader
+balance = 4773
+annualInterestRate = 0.2
+
+#Variables for functions. Also moddable in future m  for months to pay down
+#could be used as input for months, and different x start values this way
+#where x is raised by 10 while counting minimal monthly payment to pay down debt
+m = 12
+monthlyInterestRate = annualInterestRate / 12
+x = 0
+
+#Defining main outstanding debtr couting function
+def outstandingDebt(m, x):
+    """function calculates outstanding debt for m months in future.
+    it counts only minimal payments paid. Rounded to 2 decimal places"""
+    
+    #Set of variables for iteration
+    #count for counting down months, pb for first time previus balance, analogic for current balance
+    count = m
+    currbalance = balance
+    
+    #Iteration for counting  down month by month saldo
+    while count > 0:
+        #changing current balance by lowering amout by monthly payment for current month
+        #and adding monthly interest rates
+        print 
+        currbalance = round(currbalance - x, 2)
+        currbalance = round(currbalance + currbalance * monthlyInterestRate, 2)
+        #changingcount
+        count -= 1
+        # remove hashtag in line below if you want to see month by mont saldo
+        #print(currbalance)
+    
+    #when cont for numbers of months runs down print summary of balance after given period    
+    if count == 0:
+        saldo = round(currbalance, 2)
+        return saldo
+
+def canPayDown(x):
+    """ Calls in outstanding debt funct to check if it is possible to pay down
+    debt in m months with x value. If not i calss itself in another scope again,
+    until minimal value is defined"""
+    
+    #raise x by 10 every call of function and check if outstandingDebt function
+    #can find it as a lowest value to pay down debt
+    x += 10
+    if outstandingDebt(m, x) <= 0:
+        
+        #if x is the value we seek for print statement
+        print("Lowest payment: " + str(x))
+    
+    #if x is not the value we are seeking call the function in itself to test for x higher by 10
+    else:
+        canPayDown(x)   
+
+canPayDown(x)
